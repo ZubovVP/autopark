@@ -7,10 +7,13 @@
         <option value="$PROJECT_DIR$/server/pom.xml" />
         <option value="$PROJECT_DIR$/vehicles/pom.xml" />
         <option value="$PROJECT_DIR$/rentals/pom.xml" />
+        <option value="$PROJECT_DIR$/vehicle/pom.xml" />
+        <option value="$PROJECT_DIR$/rental/pom.xml" />
+        <option value="$PROJECT_DIR$/api-gateway/pom.xml" />
       </list>
     </option>
   </component>
-  <component name="ProjectRootManager">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="17" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>

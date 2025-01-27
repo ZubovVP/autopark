@@ -24,7 +24,7 @@ public class RentalServiceImpl implements RentalService {
         Rental rental = rentalRepository.getRental(id);
 
         VehicleDto vehicleDto = webClient.get()
-                .uri("http://localhost:49812/vehicles/" + rental.getVehicleId())
+                .uri("http://localhost:8082/vehicle-service/vehicles/" + rental.getVehicleId())
                 .retrieve()
                 .bodyToMono(VehicleDto.class)
                 .block();
