@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="api-gateway" />
         <module name="server" />
+        <module name="identity-service" />
         <module name="vehicle" />
         <module name="rental" />
       </profile>
@@ -23,6 +24,7 @@
       <module name="Vehicles" options="-parameters" />
       <module name="api-gateway" options="-parameters" />
       <module name="demo" options="-parameters" />
+      <module name="identity-service" options="-parameters" />
       <module name="rental" options="-parameters" />
       <module name="rentals" options="-parameters" />
       <module name="server" options="-parameters" />
