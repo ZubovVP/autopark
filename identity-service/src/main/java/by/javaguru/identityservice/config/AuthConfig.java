@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -25,16 +26,18 @@ public class AuthConfig {
         return new CustomUserDetailsService();
     }
 
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable)
+        http
+                .csrf(AbstractHttpConfigurer::disable)
                 .cors(AbstractHttpConfigurer::disable)
-                .sessionManagement(c -> c.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests((c) -> c.requestMatchers(HttpMethod.GET).permitAll()
-                        .requestMatchers("/auth/register", "/auth/token", "/auth/validate", "/h2-console/**")
-                        .permitAll().anyRequest().authenticated())
-                .headers(headers -> headers.frameOptions().sameOrigin()); // чтобы отображалась консоль H2
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(HttpMethod.GET).permitAll() // Разрешить все GET-запросы
+                        .requestMatchers("/auth/register", "/auth/token", "/auth/validate", "/h2-console/**").permitAll() // Разрешить доступ к указанным эндпоинтам
+                        .anyRequest().authenticated()
+                )
+                .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin)); // Настройка заголовков для H2 Console
 
         return http.build();
     }
